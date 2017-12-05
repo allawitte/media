@@ -26,6 +26,9 @@ function takePhoto() {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     const list = document.querySelector('.list');
+    const audio = document.createElement('audio');
+    audio.src = './audio/click.mp3';
+    audio.autoplay = true;
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
     ctx.drawImage(video, 0, 0);
@@ -36,7 +39,6 @@ function addImgToList(canvas, list) {
     let imgPath = canvas.toDataURL();
     const removePhoto = function (i) {
         return function (e) {
-
             const figure = document.querySelector('figure[data-number="'+i+'"]');
             list.removeChild(figure);
         };
@@ -139,14 +141,12 @@ function addImgToList(canvas, list) {
     };
     let figure = list.querySelector('figure');
     let currentNumber = list.children.length;
-    console.log('currentNumber pre', currentNumber);
     if (figure) {
         list.insertBefore(makeItem(listItem, currentNumber), figure)
     }
     else {
         list.appendChild(makeItem(listItem, currentNumber));
     }
-
 }
 
 function makeItem(item, currentNumber) {
